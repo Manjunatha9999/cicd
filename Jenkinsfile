@@ -6,7 +6,7 @@ node{
     
  stage('build docker image'){
      
-     sh "docker build -t manjunatha99/nginx-demo:v1 ."
+     sh "docker build -t manjunatha99/nginx-demo:v3 ."
  }
  
  stage('login in into docker hub') {
@@ -31,7 +31,7 @@ node{
     stage('deploy the nginx image') {
         sshCommand remote: remote, command: "ls -la /home/ubuntu"
          sshCommand remote: remote, command: "docker rm -f nginx_container"
-        sshCommand remote: remote, command: "docker run -d -p 80:80 --name nginx_container manjunatha99/nginx-demo:v1"
+        sshCommand remote: remote, command: "docker run -d -p 80:80 --name nginx_container manjunatha99/nginx-demo:v3"
     }
 }
 
