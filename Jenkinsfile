@@ -30,7 +30,7 @@ node{
 
     stage('deploy the nginx image') {
         sshCommand remote: remote, command: "ls -la /home/ubuntu"
-        
+         sshCommand remote: remote, command: "docker rm -f nginx_container"
         sshCommand remote: remote, command: "docker run -d -p 80:80 --name nginx_container manjunatha99/nginx-demo:v1"
     }
 }
