@@ -18,13 +18,22 @@ node{
      sh "docker push manjunatha99/nginx-demo:v1"
   } 
   
-  stage('deploy the nginx image'){
       
-      
-      
-      
-  }
-  
-  
+ withCredentials([sshUserPrivateKey(credentialsId: 'nginx', keyFileVariable: 'pemkey', usernameVariable: 'USERNAME')]) {
+    def remote = [:]
+    remote.name = 'demoserver'
+    remote.host = "13.126.233.119"
+    remote.port = 22
+    remote.user = "${USERNAME}"
+    remote.identityFile = "${pemkey}"
+    remote.allowAnyHosts = true
+
+    stage('deploy the nginx image') {
+        sshCommand remote: remote, command: "ls -la /home/ubuntu"
+        
+        sshCommand remote: remote, command: "docker run -d -p 80:80 --name nginx_container manjunatha99/nginx-demo:v1"
+    }
+}
+
   
 }
