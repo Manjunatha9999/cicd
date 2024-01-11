@@ -15,7 +15,7 @@ node{
 
   stage('push the image to dockerhub'){
   
-     sh "docker push manjunatha99/nginx-demo:v1"
+     sh "docker push manjunatha99/nginx-demo:v3"
   } 
   
       
